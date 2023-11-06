@@ -5,14 +5,14 @@ const instance = axios.create({
   params: {
     units: "metric",
     lang: "kr",
-    appid: "518dddb5d454b549d6d4ae8dfef1ab26",
+    appid: "c0d2fa1aa8da5aaa1f03a56e5f10f5c4",
   },
 });
 
 export const getWeather = () => {
-  const lat = 37.570861685709986;
-  const lon = 126.98536366946236;
+  const lat = 35.158049371114956;
+  const lon = 129.05986219337697;
   return instance
     .get(`weather?lat=${lat}&lon=${lon}`)
-    .then((response) => response.data); //매개변수라서 아무 명이나 해도 돼
+    .then((response) => response.data);
 };

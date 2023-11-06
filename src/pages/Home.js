@@ -8,10 +8,10 @@ const Wrap = styled.div`
   height: 100vh;
   margin: 0 auto;
   background: linear-gradient(
-    180deg,
-    rgba(190, 236, 255, 1) 6%,
-    rgba(124, 124, 255, 1) 64%,
-    rgba(7, 29, 222, 1) 95%
+    0deg,
+    rgba(191, 137, 255, 1) 0%,
+    rgba(173, 173, 255, 1) 30%,
+    rgba(155, 238, 255, 1) 100%
   );
   display: flex;
   justify-content: space-between;
@@ -22,7 +22,7 @@ const Wrap = styled.div`
 `;
 
 const Location = styled.div`
-  font-size: 50px;
+  font-size: 30px;
   font-weight: 700;
 `;
 
@@ -31,7 +31,7 @@ const Temp = styled.div`
   font-weight: 600;
 `;
 
-const Aesc = styled.div`
+const Desc = styled.div`
   font-size: 18px;
 `;
 
@@ -54,9 +54,9 @@ const Con = styled.div`
   justify-content: center;
   align-items: center;
   width: 33%;
-  border-radius: 1px solid rgba(255, 255, 255, 0.3);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
   &:last-child {
-    border-radius: none;
+    border-right: none;
   }
   h3 {
     font-size: 18px;
@@ -73,39 +73,37 @@ export const Home = () => {
     queryKey: ["weather"],
     queryFn: getWeather,
   });
-  // => api에 요청힐때 사용하는 hook
-  // => 비동기 사용시 상태관리하는 hhok
-  // => useQuery를 사용할때 반드시 QueryClientProvider를 설정해줘야함
+  // =>api에 요청할때 사용하는 hook
+  // =>비동기 통신 사용시 상태관리하는 hook
+  // =>useQuery를 사용할땐 반드시 QueryClientProvider를 설정해줘야 됨
 
   console.log(data);
 
-  const { name, main: temp } = data;
+  // const { name } = data;
 
   return (
     <>
       {isLoading ? (
-        "LOADING"
+        "loading"
       ) : (
         <Wrap>
-          <Location>{name}</Location>
+          <Location>{data?.name}</Location>
           <Temp>{Math.round(data?.main?.temp)}°</Temp>
-          <Aesc>{data?.weather[0]?.description}</Aesc>
+          <Desc>{data?.weather[0]?.description}</Desc>
 
           <Separ></Separ>
 
           <ConWrap>
             <Con>
-              <h3>체감온도</h3>
+              <h3>체감 온도</h3>
               <p>{Math.round(data?.main?.feels_like)}°</p>
             </Con>
-
             <Con>
-              <h3>최저온도</h3>
+              <h3>최저 온도</h3>
               <p>{Math.round(data?.main?.temp_min)}°</p>
             </Con>
-
             <Con>
-              <h3>최고온도</h3>
+              <h3>최고 온도</h3>
               <p>{Math.round(data?.main?.temp_max)}°</p>
             </Con>
           </ConWrap>

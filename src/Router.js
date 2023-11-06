@@ -6,8 +6,8 @@ const Router = () => {
   return (
     <HashRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/*" element={<PageNotFound />}></Route>
+        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </HashRouter>
   );

@@ -10,7 +10,7 @@ const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* <GlobalStyled /> */}
+      <GlobalStyled />
       <Router />
     </QueryClientProvider>
   </React.StrictMode>
