@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWeather } from "../api";
 import styled from "styled-components";
+import { useCurrentWeather } from "../lib/useCurrentWeather";
+import { Loading } from "../components/Loading";
 
 const Wrap = styled.div`
   max-width: 400px;
@@ -8,10 +10,10 @@ const Wrap = styled.div`
   height: 100vh;
   margin: 0 auto;
   background: linear-gradient(
-    0deg,
-    rgba(191, 137, 255, 1) 0%,
-    rgba(173, 173, 255, 1) 30%,
-    rgba(155, 238, 255, 1) 100%
+    180deg,
+    rgba(237, 244, 255, 1) 6%,
+    rgba(99, 150, 242, 1) 64%,
+    rgba(65, 158, 255, 1) 95%
   );
   display: flex;
   justify-content: space-between;
@@ -69,8 +71,11 @@ const Con = styled.div`
 `;
 
 export const Home = () => {
+  const result = useCurrentWeather();
+  console.log(result);
+
   const { data, isLoading } = useQuery({
-    queryKey: ["weather"],
+    queryKey: ["weather", lat, lon],
     queryFn: getWeather,
   });
   // =>api에 요청할때 사용하는 hook
@@ -79,12 +84,10 @@ export const Home = () => {
 
   console.log(data);
 
-  // const { name } = data;
-
   return (
     <>
       {isLoading ? (
-        "loading"
+        <Loading />
       ) : (
         <Wrap>
           <Location>{data?.name}</Location>
